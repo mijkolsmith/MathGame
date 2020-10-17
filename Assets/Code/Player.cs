@@ -57,7 +57,7 @@ public class Player
         {
             mass = 1.0f,
             force = 150.0f,
-            dragCoefficient = .47f
+            frictionCoefficient = .47f
         };
     }
 
@@ -81,7 +81,7 @@ public class Player
 
     private void UpdatePhysics()
     {
-        DevMath.Vector2 forceDirection = new DevMath.Vector2(-Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        DevMath.Vector2 forceDirection = new DevMath.Vector2(Input.GetAxis("Horizontal"), -Input.GetAxis("Vertical"));
 
         rigidbody.AddForce(forceDirection, Time.deltaTime);
 

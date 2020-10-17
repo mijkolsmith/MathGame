@@ -39,9 +39,14 @@ public class Enemy
 
     public void Render()
     {
-        GUIUtility.RotateAroundPivot(Rotation, Position.ToUnity());
+        //GUIUtility.RotateAroundPivot(Rotation, Position.ToUnity());
 
-        GUI.color = Color.red;
+		GUI.matrix *= 
+		GUI.matrix *= Matrix4x4.Rotate(Quaternion.AngleAxis(Rotation, Vector3.forward));
+		//pivot:
+		//GUI.matrix = GUI.matrix * new Vector4(Position.x,Position.y,0,0);
+
+		GUI.color = Color.red;
 
         GUI.DrawTexture(new Rect(Position.x - Circle.Radius, Position.y - Circle.Radius, visual.width, visual.height), visual);
 
