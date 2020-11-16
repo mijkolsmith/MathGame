@@ -74,9 +74,28 @@ public class Player
         float distanceTraveled = DevMath.DevMath.DistanceTraveled(fireVelocity, fireAcceleration, Projectile.LIFETIME);
 
         //Implementeer de Line class met de IntersectsWith(Circle) functie en gebruik deze om de lijn rood te kleuren wanneer je een enemy zou raken
-        GUI.DrawTexture(new Rect(Position.x, Position.y, distanceTraveled, 1.0f), pixel);
+		DevMath.Line line = new DevMath.Line
+		{
+			Position = new DevMath.Vector2(Position.x, Position.y),
+			Direction = DevMath.Vector2.DirectionFromAngle(Rotation),
+			Length = distanceTraveled
+		};
 
-        GUI.matrix = Matrix4x4.identity;
+		//get the first enemy with a position higher than 500 (example)
+		//var temp = Game.Instance.enemies.OrderBy((e) => e.Position.x).FirstOrDefault((e) => e.Position.x > 500);
+
+		foreach (Enemy enemy in Game.Instance.enemies)
+		{
+			if (enemy.Circle.CollidesWith(line))
+			{
+				GUI.color = Color.red;
+			}
+		}
+
+		GUI.DrawTexture(new Rect(Position.x, Position.y, distanceTraveled, 1.0f), pixel);
+		GUI.color = Color.white;
+
+		GUI.matrix = Matrix4x4.identity;
     }
 
     private void UpdatePhysics()

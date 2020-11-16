@@ -11,7 +11,7 @@ public class Game : MonoBehaviour
 
     private Player player;
 
-    private List<Enemy> enemies;
+    public List<Enemy> enemies;
 
     private List<Projectile> projectiles;
 
